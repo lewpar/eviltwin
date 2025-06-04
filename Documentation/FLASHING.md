@@ -1,6 +1,7 @@
 # ESP32 Flashing Documentation
 Make sure you have the `esptool` python package installed.
 `pip install esptool`
+Note: Do this in a virtual environment
 
 ## How do I erase the flash?
 `esptool --port COM5 erase_flash`
