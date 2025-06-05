@@ -2,16 +2,13 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-#include "MenuManager.h"
-#include "DisplayManager.h"
+#include "MenuItem.h"
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET    -1
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-MenuManager menuManager;
-DisplayManager displayManager(display);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 void setup() {
     Serial.begin(115200);
@@ -23,17 +20,18 @@ void setup() {
     }
 
     display.clearDisplay();
-    display.display();
 
-    menuManager.setupMenus();
-    displayManager.drawMenu(*menuManager.getCurrentMenu(), menuManager.getSelectedIndex());
+    display.setTextColor(SSD1306_WHITE);
+    display.setTextSize(1);
+    display.setCursor(10, 10);
+
+    MenuItem testItem("Test Item");
+
+    display.println(testItem.GetName());
+
+    display.display();
 }
 
 void loop() {
-    if (Serial.available()) {
-        char input = Serial.read();
-        menuManager.update(input);
-        displayManager.drawMenu(*menuManager.getCurrentMenu(), menuManager.getSelectedIndex());
-        delay(200); // input delay
-    }
+
 }
