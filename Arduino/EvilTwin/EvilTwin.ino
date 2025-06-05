@@ -2,7 +2,9 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+#include "Menu.h"
 #include "MenuItem.h"
+#include "MenuController.h"
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
@@ -10,28 +12,54 @@
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-void setup() {
+Menu rootMenu("Main Menu");
+MenuController menuController(&display);
+
+void setup() 
+{
     Serial.begin(115200);
     Wire.begin();
 
-    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) 
+    {
         Serial.println(F("SSD1306 init failed"));
         while (true);
     }
 
-    display.clearDisplay();
+    Serial.println("Building menu..");
 
-    display.setTextColor(SSD1306_WHITE);
-    display.setTextSize(1);
-    display.setCursor(10, 10);
+    MenuItem testItem("Test Item", MenuItemType::Function);
+    MenuItem testItem2("Test Item 2", MenuItemType::Function);
 
-    MenuItem testItem("Test Item");
+    rootMenu.AddItem(testItem);
+    rootMenu.AddItem(testItem2);
 
-    display.println(testItem.GetName());
+    menuController.SetCurrentMenu(&rootMenu);
 
-    display.display();
+    Serial.println("Drawing menu..");
+
+    menuController.DrawMenu();
 }
 
-void loop() {
+void loop() 
+{
+    if(Serial.available() > 0)
+    {
+        char c = Serial.read();
 
+        switch(c)
+        {
+            case 'w':
+                menuController.MenuUp();
+                menuController.DrawMenu();
+                break;
+
+            case 's':
+                menuController.MenuDown();
+                menuController.DrawMenu();
+                break;
+        }
+    }
 }
+
+
