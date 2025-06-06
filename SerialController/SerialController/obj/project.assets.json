@@ -770,11 +770,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/lewis/RiderProjects/SerialController/SerialController/SerialController.csproj",
+      "projectUniqueName": "/home/lewis/Repos/eviltwin/SerialController/SerialController/SerialController.csproj",
       "projectName": "SerialController",
-      "projectPath": "/home/lewis/RiderProjects/SerialController/SerialController/SerialController.csproj",
+      "projectPath": "/home/lewis/Repos/eviltwin/SerialController/SerialController/SerialController.csproj",
       "packagesPath": "/home/lewis/.nuget/packages/",
-      "outputPath": "/home/lewis/RiderProjects/SerialController/SerialController/obj/",
+      "outputPath": "/home/lewis/Repos/eviltwin/SerialController/SerialController/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/lewis/.nuget/NuGet/NuGet.Config"

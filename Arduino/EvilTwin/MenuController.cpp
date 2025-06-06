@@ -51,42 +51,72 @@ void MenuController::MenuDown()
 
 void MenuController::DrawMenu()
 {
-  if(!currentMenu)
+    if (!currentMenu)
     {
         Serial.println("No menu is set.");
         return;
     }
 
-    this->display->clearDisplay();
-    this->display->setTextColor(SSD1306_WHITE);
-    this->display->setTextSize(1);
+    display->clearDisplay();
+    display->setTextColor(SSD1306_WHITE);
+    display->setTextSize(1);
 
-    this->display->setCursor(10, 10);
+    display->setCursor(0, 0);
+    display->println(currentMenu->GetName());
+    display->drawLine(0, 10, 128, 10, SSD1306_WHITE);
 
-    this->display->println(this->currentMenu->GetName());
+    std::vector<MenuItem> menuItems = currentMenu->GetItems();
+    const int totalItems = currentMenu->GetSize();
+    const int maxItems = 5;
 
-    this->display->drawLine(4, 20, 124, 20, SSD1306_WHITE);
-
-    std::vector<MenuItem> menuItems = this->currentMenu->GetItems();
-    
-    int index = 0;
-    for(MenuItem& menuItem : menuItems)
+    // 🔧 Calculate startIndex to scroll only after selected is beyond item 4 (index 4)
+    int startIndex = 0;
+    if (selectedMenuIndex >= maxItems)
     {
-        if (selectedMenuIndex == index)
+        startIndex = selectedMenuIndex - (maxItems - 1);
+    }
+
+    // Clamp startIndex to prevent overflow
+    if (startIndex > totalItems - maxItems)
+        startIndex = totalItems - maxItems;
+    if (startIndex < 0)
+        startIndex = 0;
+
+    for (int i = 0; i < maxItems; ++i)
+    {
+        int itemIndex = startIndex + i;
+        if (itemIndex >= totalItems)
+            break;
+
+        MenuItem& menuItem = menuItems[itemIndex];
+
+        if (selectedMenuIndex == itemIndex)
         {
-            this->display->fillRect(0, 25 + (10 * index), 128, 10, SSD1306_WHITE);
-            this->display->setTextColor(SSD1306_BLACK);
+            display->fillRect(0, 15 + (10 * i), 128, 10, SSD1306_WHITE);
+            display->setTextColor(SSD1306_BLACK);
         }
         else
         {
-            this->display->setTextColor(SSD1306_WHITE);
+            display->setTextColor(SSD1306_WHITE);
         }
 
-        this->display->setCursor(10, 26 + (10 * index));
-        this->display->println(menuItem.GetName());
-
-        index++;
+        display->setCursor(10, 16 + (10 * i));
+        display->println(menuItem.GetName());
     }
 
-    this->display->display();
+    // Down arrow if there's more below
+    if (totalItems > maxItems && startIndex + maxItems < totalItems)
+    {
+        display->fillTriangle(110, 56, 120, 56, 115, 60, SSD1306_BLACK);
+        display->drawTriangle(110, 56, 120, 56, 115, 60, SSD1306_WHITE);
+    }
+
+    // Optional: up arrow
+    if (startIndex > 0)
+    {
+        display->fillTriangle(110, 14, 120, 14, 115, 10, SSD1306_BLACK);
+        display->drawTriangle(110, 14, 120, 14, 115, 10, SSD1306_WHITE);
+    }
+
+    display->display();
 }

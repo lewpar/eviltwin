@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PvD2tKKy0QA=",
+  "dgSpecHash": "IE7GWBGjH7s=",
   "success": true,
-  "projectFilePath": "/home/lewis/RiderProjects/SerialController/SerialController/SerialController.csproj",
+  "projectFilePath": "/home/lewis/Repos/eviltwin/SerialController/SerialController/SerialController.csproj",
   "expectedPackageFiles": [
     "/home/lewis/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "/home/lewis/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",

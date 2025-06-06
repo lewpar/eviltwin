@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SerialController")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c31f63ac163b9398ec069d221f04b4f693ac850e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SerialController")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SerialController")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

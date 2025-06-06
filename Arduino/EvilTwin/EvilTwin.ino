@@ -30,9 +30,17 @@ void setup()
 
     MenuItem testItem("Test Item", MenuItemType::Function);
     MenuItem testItem2("Test Item 2", MenuItemType::Function);
+    MenuItem testItem3("Test Item 3", MenuItemType::Function);
+    MenuItem testItem4("Test Item 4", MenuItemType::Function);
+    MenuItem testItem5("Test Item 5", MenuItemType::Function);
+    MenuItem testItem6("Test Item 6", MenuItemType::Function);
 
     rootMenu.AddItem(testItem);
     rootMenu.AddItem(testItem2);
+    rootMenu.AddItem(testItem3);
+    rootMenu.AddItem(testItem4);
+    rootMenu.AddItem(testItem5);
+    rootMenu.AddItem(testItem6);
 
     menuController.SetCurrentMenu(&rootMenu);
 
